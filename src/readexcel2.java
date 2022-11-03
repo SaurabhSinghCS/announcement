@@ -1,20 +1,20 @@
-import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.DataFormatter;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import java.io.*;
-import java.util.HashMap;
-import java.util.Map;
-
-//PDFWriter
-import java.io.FileOutputStream;
-import java.io.File;
-import java.util.Properties;
-
 import org.apache.poi.xwpf.usermodel.*;
 import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTHyperlink;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Properties;
 
-public class readexcel2 extends Exception
-{
+public class readexcel2 extends Exception {
     static XWPFHyperlinkRun createHyperlinkRun(XWPFParagraph paragraph, String uri) {
         String rId = paragraph.getDocument().getPackagePart().addExternalRelationship(
                 uri,
@@ -29,14 +29,14 @@ public class readexcel2 extends Exception
                 paragraph
         );
     }
-    public static <Static> void main(String[] args)
+    public static void main(String[] args)
     {
-       // Document doc = new Document();
+        // Document doc = new Document();
         try
         {
 //PDF
             //PdfWriter.getInstance(doc, new FileOutputStream("/Users/himanshig/Excel/Sep22.pdf"));
-           // doc.open();
+            // doc.open();
 //Word
             XWPFDocument document = new XWPFDocument();
             FileOutputStream out = new FileOutputStream("/u01/jenkins/workspace/release_announcement_document/Release_Announcement.docx");
@@ -94,27 +94,27 @@ doc.add(new Paragraph("Community URL = "+CommunityURL));
                 XWPFHyperlinkRun hyperlinkrun = createHyperlinkRun(paragraph1, CommunityURL);
                 hyperlinkrun.setText(ProductLine);
                 hyperlinkrun.setColor("0000FF");
-               hyperlinkrun.setUnderline(UnderlinePatterns.SINGLE);
+                hyperlinkrun.setUnderline(UnderlinePatterns.SINGLE);
                 //run = paragraph1.createRun();
-               // run.setText("");
-               // paragraph1 = document.createParagraph();
-              //  paragraph1 = document.createParagraph();
-              //  run = paragraph1.createRun();
+                // run.setText("");
+                // paragraph1 = document.createParagraph();
+                //  paragraph1 = document.createParagraph();
+                //  run = paragraph1.createRun();
 
 // HYPERLINK of pdf
-               //Paragraph paragraph = new Paragraph();
+                //Paragraph paragraph = new Paragraph();
                 //Anchor anchor = new Anchor(String.valueOf(doc.add(new Paragraph(ProductLine))));
                 //Anchor anchor = new Anchor(ProductLine);
                 //anchor.setReference(CommunityURL);
                 //paragraph.add(anchor);
                 //doc.add(paragraph);
 //Print at console
-               System.out.print(i+" "+ProductLine);
-               System.out.print("   ||   ");
-               System.out.println(CommunityURL);
+                System.out.print(i+" "+ProductLine);
+                System.out.print("   ||   ");
+                System.out.println(CommunityURL);
                 // System.out.print("Product Line/Product = " + formatter.formatCellValue(row.getCell(requiredHeaders.get("Product Line/Product")))+" "+ version);
-               // System.out.print("   ||   ");
-              // System.out.println("Community URL = " + formatter.formatCellValue(row.getCell(requiredHeaders.get("Community URL"))));
+                // System.out.print("   ||   ");
+                // System.out.println("Community URL = " + formatter.formatCellValue(row.getCell(requiredHeaders.get("Community URL"))));
 
             }
 //footer
@@ -130,7 +130,7 @@ doc.add(new Paragraph("Community URL = "+CommunityURL));
             run10 = paragraph10.createRun();
             run10.setText(p.getProperty("String5"));
 
-           // doc.close();
+            // doc.close();
             workbook.close();
             document.write(out);
             out.close();
@@ -138,7 +138,7 @@ doc.add(new Paragraph("Community URL = "+CommunityURL));
             //System.out.println("Written to a pdf");
         }
 
-catch (Exception e)
+        catch (Exception e)
         {
             e.printStackTrace();
         }
